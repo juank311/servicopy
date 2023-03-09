@@ -3,11 +3,12 @@ require RUTA_APP . '/vistas/inc/head.php';
 require RUTA_APP . '/vistas/inc/header.php';
 ?>
 <main>
-
+    <br><br>
     <div class="container-md container-lg container-sm mt-5 ">
-        <div class="row justify-content-center">
+        
+        <div class="row">
             <div class="col-sm-12 col-md-3 col-lg-2 mt-4">
-                <a href="<?= RUTA_URL ?>/registros/registro_diario">
+                <a href="<?= RUTA_URL ?>/registros/dashboard">
                <div class="card" style="width: 11rem;">
                         <img src="<?= RUTA_URL ?>/img/formulario_01.webp" class="card-img-top" alt="...">
                         <div class="card-body">

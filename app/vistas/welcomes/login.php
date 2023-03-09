@@ -4,19 +4,16 @@
     require RUTA_APP . '/vistas/inc/header.php';
     ?>
     <main>
-        <div class="container mt-4">
+        <br><br>
+        <div class="container mt-5">
             <div class="row border" style="border-radius: 15px;">
                 <div class="col-md-12 mx-auto">
                     <div class="row">
-                        <div class="col-7 d-flex align-items-center justify-content-center" >
-                            <h2 class="color:">Clínica Universitaria Medicina Integral</h2>
-                        </div>
-                        <div class="col-5">
-                            <img src="<?= RUTA_URL ?>/img/logo.png" class="img-fluid" alt="Responsive image font-weight-bold">
+                        
+                        <div class="col-12 mt-5 d-flex align-items-center justify-content-center">
+                            <img src="<?= RUTA_URL ?>/img/logo.png" class="img-fluid"  style="width: 40vmin;">
                         </div>
                     </div>
-
-                    <h4 class="text-center text-white">Formatos y Planillas en Línea</h4>
                     <?php if (isset($_SESSION['error'])) : ?>
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <strong><?= $_SESSION['error']; ?></strong>

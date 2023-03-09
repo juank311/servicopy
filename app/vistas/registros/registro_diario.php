@@ -5,8 +5,8 @@ require RUTA_APP . '/vistas/inc/header.php';
 ?>
 
 <main id="formulario">
-
-    <div class="container mt-4">
+<br><br>
+    <div class="container mt-5">
         <div class="row border">
             <div class="col-3 border" style="text-align: center;">
                 <img src="<?= RUTA_URL ?>/img/logo.png" style="width: 12vmin;">

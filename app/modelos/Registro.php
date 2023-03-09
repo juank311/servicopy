@@ -22,6 +22,18 @@ class Registro
         return ($datos);
     }
 
+    public function mostrar_gastos_hoy()
+    {
+        $this->db->query("SELECT g.id, g.valor_gasto, r.nombre AS rubro, g.date_creation, g.observacion
+        FROM gastos g
+        INNER JOIN rubrogasto r ON g.id_rubro = r.id
+        WHERE DATE(g.date_creation) = DATE(NOW())");
+        $datos = $this->db->registros();
+
+        return ($datos);
+    }
+
+
     public function agregarRegistro($datos)
     {
         if (isset($datos['valor_venta']) && $datos['valor_venta'] != "" && $datos['valor_gasto'] == "" && $datos['id_rubro'] == "8") {

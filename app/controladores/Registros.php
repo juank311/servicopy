@@ -13,7 +13,9 @@ class Registros extends Controlador
         $this->vista('Registros/inicio');
     }
     /* -------------------------------------------- */
-    public function registro_diario()
+   
+     /* -------------------------------------------- */
+    public function dashboard()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['enviarFormulario'])) {
             $datos =
@@ -47,12 +49,15 @@ class Registros extends Controlador
             }
         }else 
         {
-            if ($this->RegistrosModelo->mostrar_rubros()) 
+            if ($this->RegistrosModelo->mostrar_rubros() && $this->RegistrosModelo->mostrar_gastos_hoy()) 
             {
-                $datos = $this->RegistrosModelo->mostrar_rubros();
+                $datos = [
+                            'dataRubros' => $this->RegistrosModelo->mostrar_rubros(),
+                            'dataGastos' => $this->RegistrosModelo->mostrar_gastos_hoy()
+                         ];
             }
 
-            $this->vista('Registros/registro_diario', $datos);
+            $this->vista('Registros/dashboard', $datos);
         };
     }
     /* --------------------------MOSTRAR RUBROS-------------------------- */
@@ -67,7 +72,7 @@ class Registros extends Controlador
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $datos = ['id' => $id];
             if ($this->RegistrosModelo->borrarFormulario($datos)) {
-                header('Location: ' . RUTA_URL . '/Registros/lista01');
+                header('Location: ' . RUTA_URL . '/registros/lista01');
                 exit();
             }
         }
