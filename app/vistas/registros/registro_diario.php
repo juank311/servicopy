@@ -70,7 +70,7 @@ require RUTA_APP . '/vistas/inc/header.php';
                                     <tr>
                                         <th class="col-2 border align-cente text-center">Descripción</th>
                                         <th class="col-1 border align-cente text-center ">($ venta)</th>
-                                        <th class="col-1 border align-cente text-center ">Gasto 1</th>
+                                        <th class="col-1 border align-cente text-center ">Gasto</th>
                                         <th class="col-1 border align-cente text-center ">Tipo de Gasto</th>
                                     </tr>
                                 </thead>
@@ -104,7 +104,7 @@ require RUTA_APP . '/vistas/inc/header.php';
                                 <button type="button" class="btn" style="background-color: #36769e; color: aliceblue;" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"><i class="fas fa-plus-square"></i> Agregar Gasto</button>
                             </div>
                             <div class="d-grid gap-2 col-3 mx-auto mt-4">
-                                <button class="btn" style="background-color: #36769e; color: aliceblue;" id="enviarFormulario" value="agregar_formulario" type="submit"><b>Enviar</b></button>
+                                <button class="btn" style="background-color: #36769e; color: aliceblue;" id="enviarFormulario" name="enviarFormulario" type="submit"><b>Enviar</b></button>
                             </div>
                         </form>
                     </div>
@@ -125,11 +125,11 @@ require RUTA_APP . '/vistas/inc/header.php';
 
                         <div class="mb-1">
                             <label for="recipient-name" class="col-form-label">Valor:</label>
-                            <input type="number" class="form-control" id="recipient-name">
+                            <input required type="number" class="form-control" id="recipient-name" name="valor_gasto">
                         </div>
                         <div class="mb-1">
                             <label for="recipient-name" class="col-form-label">Tipo de Gasto:</label>
-                            <select class="form-select" aria-label="Default select example" name="id_rubro">
+                            <select required class="form-select" aria-label="Default select example" name="id_rubro">
                                 <option selected>--Seleccione el tipo de gasto--</option>
                                 <?php foreach ($datos as $data) : ?>
                                     <option value="<?= $data->id ?>"><?= $data->nombre; ?></option>
@@ -143,7 +143,7 @@ require RUTA_APP . '/vistas/inc/header.php';
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                        <button value="enviar_gasto2" type="submit" class="btn btn-primary">Resgistrar Gasto</button>
+                        <button name="enviarFormulario2" type="submit" class="btn btn-primary">Resgistrar Gasto</button>
                     </div>
                 </div>
             </div>
