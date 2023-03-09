@@ -1,0 +1,75 @@
+header {
+    background-color: #1A5276;
+    /* Cambiar por el tono de azul deseado */
+    color: #fff;
+    /* Cambiar el color del texto a blanco */
+    padding: 30px 0;
+    /* Añadir un poco de espacio interno al footer */
+}
+
+#gasto::placeholder {
+    color: red;
+  }
+
+  #venta::placeholder {
+    color: green;
+  }
+#login{
+    background-color: black;
+}
+
+
+
+.form-group {
+    text-align: center;
+}
+
+h1 {
+    color: rgb(133, 14, 14);
+    text-align: center;
+}
+
+h2 {
+    color: white;
+    text-align: center;
+}
+
+h4 {
+    color: white;
+    text-align: center;
+}
+
+
+h3 {
+    color: white;
+    text-align: center;
+}
+
+
+footer {
+    background-color: #1A5276;
+    /* Cambiar por el tono de azul deseado */
+    color: #fff;
+    /* Cambiar el color del texto a blanco */
+    padding: 30px 0;
+    /* Añadir un poco de espacio interno al footer */
+}
+
+#formulario {
+    background-color: rgb(255, 255, 255);
+}
+
+#sup {
+    color: red;
+}
+
+.caja {
+    background: #ffffff;
+    border: 1px solid gray;
+    border-radius: 12px;
+    padding: 10px;
+  }
+
+  .caja2 {
+    background-color: goldenrod;
+  }
