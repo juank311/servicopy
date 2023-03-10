@@ -14,7 +14,7 @@ require RUTA_APP . '/vistas/inc/header.php';
     </div>
 
 </aside>
-<main style="margin: 50px; margin-left: 150px;">
+<main style="margin: 50px; margin-left: 200px;">
     <!-- <button id="btn-toggle-aside" type="button" class="btn btn-primary">
   Mostrar/Ocultar Aside
 </button> -->
@@ -129,7 +129,7 @@ require RUTA_APP . '/vistas/inc/header.php';
             </div>
         </div>
         <div class="container border">
-            <table id="tblArticulos" class="table">
+        <table id="gastos" class="table">
                 <thead>
                     <tr>
                         <th>No.</th>
@@ -157,8 +157,7 @@ require RUTA_APP . '/vistas/inc/header.php';
                 </tbody>
             </table>
         </div>
-    </div>
-
+      
     <!-- modal -->
     <form action="" method="POST">
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -177,7 +176,7 @@ require RUTA_APP . '/vistas/inc/header.php';
                             <label for="recipient-name" class="col-form-label">Tipo de Gasto:</label>
                             <select required class="form-select" aria-label="Default select example" name="id_rubro">
                                 <option selected>--Seleccione el tipo de gasto--</option>
-                                <?php foreach ($datos as $data) : ?>
+                                <?php foreach ($datos['dataRubros'] as $data) : ?>
                                     <option value="<?= $data->id ?>"><?= $data->nombre; ?></option>
                                 <?php endforeach; ?>
                             </select>
@@ -201,8 +200,12 @@ require RUTA_APP . '/vistas/inc/header.php';
 <?php
 require RUTA_APP . '/vistas/inc/footer.php';
 ?>
+ <script>
+        $(document).ready(function() {
+            $('#gastos').DataTable();
+        });
+    </script>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
         $("#enviarFormulario").click(function() {
@@ -234,7 +237,7 @@ require RUTA_APP . '/vistas/inc/footer.php';
         });
     });
 </script>
-<script>
+<!-- <script>
     // Obtener el botón y el aside
     const btnToggleAside = document.getElementById('btn-toggle-aside');
     const myAside = document.getElementById('myAside');
@@ -244,6 +247,6 @@ require RUTA_APP . '/vistas/inc/footer.php';
         // Toggle de la clase d-none para mostrar/ocultar el aside
         myAside.classList.toggle('d-none');
     });
-</script>
+</script> -->
 
 </div>
