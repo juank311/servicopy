@@ -27,7 +27,7 @@ class Registros extends Controlador
 
             if ($this->RegistrosModelo->agregarRegistro($datos)) {
 
-                header('Location: ' . RUTA_URL . '/registros/registro_diario');
+                header('Location: ' . RUTA_URL . '/registros/dashboard');
                 exit();
             } else {
                 die('Algo está salio mal');
@@ -42,22 +42,15 @@ class Registros extends Controlador
 
             if ($this->RegistrosModelo->agregarGasto($datos)) {
 
-                header('Location: ' . RUTA_URL . '/registros/registro_diario');
+                header('Location: ' . RUTA_URL . '/registros/dashboard');
                 exit();
             } else {
                 die('Algo está salio mal');
             }
         }else 
         {
-            if ($this->RegistrosModelo->mostrar_rubros() && $this->RegistrosModelo->mostrar_gastos_hoy()) 
-            {
-                $datos = [
-                            'dataRubros' => $this->RegistrosModelo->mostrar_rubros(),
-                            'dataGastos' => $this->RegistrosModelo->mostrar_gastos_hoy()
-                         ];
-            }
-
-            $this->vista('Registros/dashboard', $datos);
+            $this->vista('Registros/dashboard', $datos=['dataRubros' => $this->RegistrosModelo->mostrar_rubros(),
+            'dataGastos' => $this->RegistrosModelo->mostrar_gastos_hoy()]);
         };
     }
     /* --------------------------MOSTRAR RUBROS-------------------------- */

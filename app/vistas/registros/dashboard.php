@@ -1,6 +1,6 @@
 <?php
 require RUTA_APP . '/vistas/inc/head.php';
-require RUTA_APP . '/vistas/inc/header.php';
+/* require RUTA_APP . '/vistas/inc/header.php'; */
 ?>
 
 <aside id="myAside">
@@ -122,89 +122,91 @@ require RUTA_APP . '/vistas/inc/header.php';
         </div>
     </div>
 
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-12 border  text-center align-center  py-1" style="background-color: #36769e; color: aliceblue;">
-                <h6>GASTOS DE HOY <?= date('M-d'); ?></h6>
+    <?php if (isset($datos['dataGastos'][0]->id)) : ?>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-12 border  text-center align-center  py-1" style="background-color: #36769e; color: aliceblue;">
+                    <h6>GASTOS DE HOY <?= date('M-d'); ?></h6>
+                </div>
             </div>
-        </div>
-        <div class="container border">
-        <table id="gastos" class="table">
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>Gasto</th>
-                        <th>Rubro</th>
-                        <th>Fecha</th>
-                        <th>Observación</th>
-                        <th>Acciones</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($datos['dataGastos'] as $data) : ?>
+            <div class="container border">
+                <table id="gastos" class="table">
+                    <thead>
                         <tr>
-                            <td>1</td>
-                            <td><?= $data->valor_gasto?></td>
-                            <td><?= $data->rubro?></td>
-                            <td><?= $data->date_creation?></td>
-                            <td><?= $data->observacion?></td>
-                            <td>
-                                <button class="btn btn-primary">Ver</button>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-      
-    <!-- modal -->
-    <form action="" method="POST">
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header" style="background-color: #1A5276;">
-                        <h5 style="color:antiquewhite;" class="modal-title" id="exampleModalLabel"><i class="fas fa-plus-square"></i> Nuevo Gasto</h5>
-                    </div>
-                    <div class="modal-body">
+                            <th>No.</th>
+                            <th>Gasto</th>
+                            <th>Rubro</th>
+                            <th>Fecha</th>
+                            <th>Observación</th>
+                            <th>Acciones</th>
 
-                        <div class="mb-1">
-                            <label for="recipient-name" class="col-form-label">Valor:</label>
-                            <input required type="number" class="form-control" id="recipient-name" name="valor_gasto">
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($datos['dataGastos'] as $data) : ?>
+                            <tr>
+                                <td>1</td>
+                                <td><?= $data->valor_gasto ?></td>
+                                <td><?= $data->rubro ?></td>
+                                <td><?= $data->date_creation ?></td>
+                                <td><?= $data->observacion ?></td>
+                                <td>
+                                    <button class="btn btn-primary">Ver</button>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php endif; ?>
+
+        <!-- modal -->
+        <form action="" method="POST">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color: #1A5276;">
+                            <h5 style="color:antiquewhite;" class="modal-title" id="exampleModalLabel"><i class="fas fa-plus-square"></i> Nuevo Gasto</h5>
                         </div>
-                        <div class="mb-1">
-                            <label for="recipient-name" class="col-form-label">Tipo de Gasto:</label>
-                            <select required class="form-select" aria-label="Default select example" name="id_rubro">
-                                <option selected>--Seleccione el tipo de gasto--</option>
-                                <?php foreach ($datos['dataRubros'] as $data) : ?>
-                                    <option value="<?= $data->id ?>"><?= $data->nombre; ?></option>
-                                <?php endforeach; ?>
-                            </select>
+                        <div class="modal-body">
+
+                            <div class="mb-1">
+                                <label for="recipient-name" class="col-form-label">Valor:</label>
+                                <input required type="number" class="form-control" id="recipient-name" name="valor_gasto">
+                            </div>
+                            <div class="mb-1">
+                                <label for="recipient-name" class="col-form-label">Tipo de Gasto:</label>
+                                <select required class="form-select" aria-label="Default select example" name="id_rubro">
+                                    <option selected>--Seleccione el tipo de gasto--</option>
+                                    <?php foreach ($datos['dataRubros'] as $data) : ?>
+                                        <option value="<?= $data->id ?>"><?= $data->nombre; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="mb-1">
+                                <label for="message-text" class="col-form-label">Observación:</label>
+                                <textarea name="observacion" class="form-control" id="message-text"></textarea>
+                            </div>
                         </div>
-                        <div class="mb-1">
-                            <label for="message-text" class="col-form-label">Observación:</label>
-                            <textarea name="observacion" class="form-control" id="message-text"></textarea>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                            <button name="enviarFormulario2" type="submit" class="btn btn-primary">Resgistrar Gasto</button>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                        <button name="enviarFormulario2" type="submit" class="btn btn-primary">Resgistrar Gasto</button>
                     </div>
                 </div>
             </div>
-        </div>
-    </form>
-    <!-- --------------end main ----------- -->
+        </form>
+        <!-- --------------end main ----------- -->
 </main>
 
 <?php
 require RUTA_APP . '/vistas/inc/footer.php';
 ?>
- <script>
-        $(document).ready(function() {
-            $('#gastos').DataTable();
-        });
-    </script>
+<script>
+    $(document).ready(function() {
+        $('#gastos').DataTable();
+    });
+</script>
 
 <script>
     $(document).ready(function() {
