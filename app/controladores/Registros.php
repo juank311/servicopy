@@ -49,8 +49,15 @@ class Registros extends Controlador
             }
         }else 
         {
-            $this->vista('Registros/dashboard', $datos=['dataRubros' => $this->RegistrosModelo->mostrar_rubros(),
-            'dataGastos' => $this->RegistrosModelo->mostrar_gastos_hoy()]);
+            $this->vista('Registros/dashboard', 
+            $datos=[
+                'dataRubros' => $this->RegistrosModelo->mostrar_rubros(),
+                'dataGastos' => $this->RegistrosModelo->mostrar_gastos_hoy(),
+                'dataUsuarios' => $this->RegistrosModelo->mostrar_usuarios(),
+                'dataProveedores' => $this->RegistrosModelo->mostrar_proveedores(),
+                'dataProveedoresHoy' => $this->RegistrosModelo->mostrar_pagos_proveedores_hoy(),
+
+            ]);
         };
     }
     /* --------------------------MOSTRAR RUBROS-------------------------- */
