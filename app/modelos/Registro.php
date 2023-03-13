@@ -15,6 +15,15 @@ class Registro
         return $this->db->registros();
     }
 
+    #Obtiene y muestra las ventas del dia corriente (actual)
+    public function mostrar_ventas_hoy()
+    {
+        $this->db->query("SELECT *
+         FROM ventas v
+         WHERE DATE(v.date_creation) = DATE(NOW())");
+        return $this->db->registros();
+    }
+
     #Obtiene y muestra los indices de los rubros de gastos
     public function mostrar_rubros()
     {
@@ -71,11 +80,12 @@ class Registro
                 return false;
             }
         } elseif (isset($datos['valor_venta']) && $datos['valor_venta'] !== "" && $datos['valor_gasto'] > 1) {
-            $this->db->query('INSERT INTO gastos (valor_gasto, id_rubro) 
-            VALUES (:valor_gasto, :id_rubro)');
+            $this->db->query('INSERT INTO gastos (valor_gasto, id_rubro, id_usuario) 
+            VALUES (:valor_gasto, :id_rubro, :id_usuario)');
             //vinculacion de datos
             $this->db->bind('valor_gasto', $datos['valor_gasto']);
             $this->db->bind('id_rubro', $datos['id_rubro']);
+            $this->db->bind('id_usuario', $_SESSION['dataUser']->id);
 
             #ejecutar la consulta 
             if ($this->db->execute()) {
@@ -95,16 +105,29 @@ class Registro
             return false;
         }
     }
-    #Inserta los gastos desde el modal.
+    #Inserta los gastos desde el modal si el usuario ingresa una fecha, entra por el if, de lo contrario entra por el else.
     public function agregarGasto($datos)
     {
-        $this->db->query('INSERT INTO gastos (valor_gasto, id_rubro, observacion) 
-        VALUES (:valor_gasto, :id_rubro, :observacion)');
-        //vinculacion de datos
-        $this->db->bind('valor_gasto', $datos['valor_gasto']);
-        $this->db->bind('id_rubro', $datos['id_rubro']);
-        $this->db->bind('observacion', $datos['observacion']);
+        if (($datos['date_creation'] > 1)) {
+            $this->db->query('INSERT INTO gastos (valor_gasto, id_rubro, observacion, id_usuario, date_creation) 
+            VALUES (:valor_gasto, :id_rubro, :observacion, :id_usuario, :date_creation)');
+            //vinculacion de datos
+            $this->db->bind('valor_gasto', $datos['valor_gasto']);
+            $this->db->bind('id_rubro', $datos['id_rubro']);
+            $this->db->bind('id_usuario', $_SESSION['dataUser']->id);
+            $this->db->bind('observacion', $datos['observacion']);
+            $this->db->bind('date_creation', $datos['date_creation']);
+            #ejecutar la consulta 
 
+        } else {
+            $this->db->query('INSERT INTO gastos (valor_gasto, id_rubro, observacion, id_usuario) 
+            VALUES (:valor_gasto, :id_rubro, :observacion, :id_usuario)');
+            //vinculacion de datos
+            $this->db->bind('valor_gasto', $datos['valor_gasto']);
+            $this->db->bind('id_rubro', $datos['id_rubro']);
+            $this->db->bind('observacion', $datos['observacion']);
+            $this->db->bind('id_usuario', $_SESSION['dataUser']->id);
+        }
         #ejecutar la consulta 
         if ($this->db->execute()) {
             return true;

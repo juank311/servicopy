@@ -39,7 +39,7 @@ require RUTA_APP . '/vistas/inc/header.php';
                         <b>Sistema de Registro de Ingresos y Gastos Diarios</b>
                     </div>
                     <div class="col-12 border-bottom text-center align-center">
-                        <b>PAPELERIA Y VARIEDADES SERVICOPY</b>
+                        <b>ALMACEN Y TALLER DESVARE MOTOS</b>
                     </div>
                     <div class="col-12 text-center align-cente">
                         <b>MACROPROCESO: CONTABILIDAD</b>
@@ -55,7 +55,7 @@ require RUTA_APP . '/vistas/inc/header.php';
                         VERSIÓN: 01
                     </div>
                     <div class="col-12">
-                        VIGENCIA: 25-08-2021
+                        VIGENCIA: 10-03-23
                     </div>
                 </div>
             </div>
@@ -107,23 +107,20 @@ require RUTA_APP . '/vistas/inc/header.php';
                                 <tbody>
                                     <tr>
                                         <td class="col-1 border align-cente text-center">
-                                            VENTAS <?= date('Y-M-d'); ?>
+                                            VENTAS <?= date('d-M-Y'); ?>
                                             <sup style="color: red;">*</sup>
                                         </td>
                                         <td class="col-1 border align-cente text-center">
                                             <div>
-                                                <input required type="text" class="form-control" id="venta" name="valor_venta" placeholder="$">
-                                            </div>
+                                                <input required type="text" class="form-control" id="venta" name="valor_venta" placeholder="$"  value="<?php if (isset($datos['dataVentas'][0]->valor_venta) ) { echo "$ ".$datos['dataVentas'][0]->valor_venta;} ?>" <?php if (isset($datos['dataVentas'][0]->valor_venta) ) { echo "readonly";} ?>> </div>
                                         </td>
                                         <td class="col-1 border align-cente text-center">
                                             <div>
-                                                <input type="number" class="form-control" id="gasto" name="valor_gasto" placeholder="-$">
+                                                <input type="number" class="form-control" id="gasto" name="valor_gasto" placeholder="-$" <?php if (isset($datos['dataVentas'][0]->valor_venta) ) { echo "readonly";} ?>> 
                                             </div>
                                         </td>
                                         <td class="col-1 border align-cente text-center">
-                                            <select id="id_rubro" <?php if (isset($_POST['valor_gasto']) && !empty($_POST['valor_gasto'])) {
-                                                                        echo " required";
-                                                                    } ?> class="form-select" aria-label="Default select example" name="id_rubro">
+                                            <select id="id_rubro" class="form-select" aria-label="Default select example" name="id_rubro">
                                                 <option value="8" selected>--Tipo de Gasto--</option>
                                                 <?php foreach ($datos['dataRubros'] as $data) : ?>
                                                     <option value="<?= $data->id ?>"><?= $data->nombre; ?></option>
@@ -132,9 +129,11 @@ require RUTA_APP . '/vistas/inc/header.php';
                                         </td>
                                 </tbody>
                             </table>
+                            <?php if (!isset($datos['dataVentas'][0]->valor_venta) ) :  ?>
                             <div class="d-grid gap-2 col-3 mx-auto mt-4">
                                 <button class="btn btn-dark" style="color: aliceblue;" id="enviarFormulario" name="enviarFormulario" type="submit"><b>Enviar Venta</b></button>
                             </div>
+                            <?php endif;?>
                         </form>
 
                     </div>
@@ -247,7 +246,7 @@ require RUTA_APP . '/vistas/inc/header.php';
                         </div>
                         <div class="mb-1">
                             <label for="message-text" class="col-form-label">Fecha:</label>
-                            <input type="date" class="form-control" id="recipient-name" name="date_gasto">
+                            <input type="date" class="form-control" id="recipient-name" name="date_creation">
                         </div>
                         <div class="mb-1">
                             <label for="message-text" class="col-form-label">Observación:</label>

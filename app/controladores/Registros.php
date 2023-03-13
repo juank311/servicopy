@@ -34,9 +34,10 @@ class Registros extends Controlador
             }
         } elseif ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['enviarFormulario2'])) {
             $datos =
-                [
+                [   
                     'observacion' => trim($_POST['observacion']),
                     'valor_gasto' => trim($_POST['valor_gasto']),
+                    'date_creation' => trim($_POST['date_creation']),
                     'id_rubro' => trim($_POST['id_rubro'])
                 ];
 
@@ -51,6 +52,7 @@ class Registros extends Controlador
         {
             $this->vista('Registros/dashboard', 
             $datos=[
+                'dataVentas' => $this->RegistrosModelo->mostrar_ventas_hoy(),
                 'dataRubros' => $this->RegistrosModelo->mostrar_rubros(),
                 'dataGastos' => $this->RegistrosModelo->mostrar_gastos_hoy(),
                 'dataUsuarios' => $this->RegistrosModelo->mostrar_usuarios(),
